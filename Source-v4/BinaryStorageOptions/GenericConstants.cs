@@ -29,13 +29,20 @@ namespace BinaryStorageOptions
 			{ DocumentBodyAttributeKey, "body" },
 			{ FileNameAttributeKey, "filename" },
 		};
-		public static ReadOnlyDictionary<string, ReadOnlyDictionary<string, string>> Constants = new ReadOnlyDictionary<string, ReadOnlyDictionary<string, string>>(
+        private static Dictionary<string, string> fileConstants = new Dictionary<string, string>
+        {
+            { DocumentBodyAttributeKey, "body" },
+            { FileNameAttributeKey, "filename" },
+        };
+        public static ReadOnlyDictionary<string, ReadOnlyDictionary<string, string>> Constants = new ReadOnlyDictionary<string, ReadOnlyDictionary<string, string>>(
 			new Dictionary<string, ReadOnlyDictionary<string, string>>
 			{
 				{ CrmConstants.AnnotationEntityName, new ReadOnlyDictionary<string, string>(annotationConstants) },
 				{ CrmConstants.AttachmentEntityName, new ReadOnlyDictionary<string, string>(attachmentConstants) },
-			}
-		);
+                { CrmConstants.FileEntityName, new ReadOnlyDictionary<string, string>(fileConstants) },
+
+            }
+        );
 
 	}
 }

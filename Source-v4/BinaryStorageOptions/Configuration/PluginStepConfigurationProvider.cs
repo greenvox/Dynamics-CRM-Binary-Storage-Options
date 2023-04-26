@@ -37,7 +37,7 @@ namespace BinaryStorageOptions.Configuration
 			}
 		}
 
-		public AuthenticationType AuthenticationType
+		public Providers.AuthenticationType AuthenticationType
         {
 			get
             {

@@ -57,12 +57,12 @@ namespace BinaryStorageOptions.Configuration
 			return string.IsNullOrWhiteSpace(storageProviderEndpointSuffix) ? DefaultProviderEndpointSuffix : storageProviderEndpointSuffix;
 		}
 		
-		protected AuthenticationType GetAuthenticationType(string authenticationTypeValue)
+		protected Providers.AuthenticationType GetAuthenticationType(string authenticationTypeValue)
 		{
-			AuthenticationType authenticationType = Providers.AuthenticationType.AccessKey;
+            Providers.AuthenticationType authenticationType = Providers.AuthenticationType.AccessKey;
 			try
 			{
-				authenticationType = (AuthenticationType)Enum.Parse(typeof(AuthenticationType), authenticationTypeValue);
+				authenticationType = (Providers.AuthenticationType)Enum.Parse(typeof(Providers.AuthenticationType), authenticationTypeValue);
 			}
 			catch
 			{

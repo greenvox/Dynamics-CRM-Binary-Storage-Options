@@ -38,8 +38,9 @@ namespace BinaryStorageOptions
 			{
 				//Handles retrieve message
 				Entity entity = (Entity)context.OutputParameters[CrmConstants.BusinessEntityKey];
-				if (entity.LogicalName != CrmConstants.AnnotationEntityName && entity.LogicalName != CrmConstants.AttachmentEntityName)
-					return;
+				if (entity.LogicalName != CrmConstants.AnnotationEntityName && entity.LogicalName != CrmConstants.AttachmentEntityName && entity.LogicalName != CrmConstants.FileEntityName)
+                    return;
+                
 				entities.Add(entity);
 			}
 			else if (context.MessageName == MessageName.RetrieveMultiple && context.OutputParameters.Contains(CrmConstants.BusinessEntityCollectionKey) && context.OutputParameters[CrmConstants.BusinessEntityCollectionKey] is EntityCollection)

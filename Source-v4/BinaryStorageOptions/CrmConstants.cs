@@ -10,6 +10,7 @@ namespace BinaryStorageOptions
 	{
 		public const string AnnotationEntityName = "annotation";
 		public const string AttachmentEntityName = "activitymimeattachment";
+		public const string FileEntityName = "fileattachment";
 
 		public const string TargetParameterKey = "Target";
 		public const string RelatedEntitiesQueryKey = "RelatedEntitiesQuery";

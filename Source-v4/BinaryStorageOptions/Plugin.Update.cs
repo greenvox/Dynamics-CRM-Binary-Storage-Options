@@ -24,9 +24,10 @@ namespace BinaryStorageOptions
 				try
 				{
 					Entity entity = (Entity)context.InputParameters[CrmConstants.TargetParameterKey];
-					if (entity.LogicalName != CrmConstants.AnnotationEntityName && entity.LogicalName != CrmConstants.AttachmentEntityName)
-						return;
 
+                    if (entity.LogicalName != CrmConstants.AnnotationEntityName && entity.LogicalName != CrmConstants.AttachmentEntityName && entity.LogicalName != CrmConstants.FileEntityName)
+						return;
+					
 					if (!context.PreEntityImages.ContainsKey(PreUpdateKey) || context.PreEntityImages[PreUpdateKey] == null)
 					{
 						throw new InvalidPluginExecutionException(OperationStatus.Failed, string.Format("PreEntityImage could not be found when updating {0}", context.PrimaryEntityName));
@@ -39,10 +40,10 @@ namespace BinaryStorageOptions
 						return;
 					}
 
-					IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
-					IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
+                    IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
+                    IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
 
-					Configuration.IConfigurationProvider configurationProvider = Configuration.Factory.GetConfigurationProvider(service, entity.LogicalName, unsecurePluginStepConfiguration, securePluginStepConfiguration);
+                    Configuration.IConfigurationProvider configurationProvider = Configuration.Factory.GetConfigurationProvider(service, entity.LogicalName, unsecurePluginStepConfiguration, securePluginStepConfiguration);
 					if (configurationProvider.StorageProviderType == Providers.StorageProviderType.CrmDefault)
 					{
 						//In this case, not doing anything with the binary data.

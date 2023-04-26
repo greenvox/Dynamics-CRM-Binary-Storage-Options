@@ -26,14 +26,15 @@ namespace BinaryStorageOptions
 					throw new InvalidPluginExecutionException(OperationStatus.Failed, string.Format("PreEntityImage could not be found when deleting {0}", context.PrimaryEntityName));
 				}
 				Entity entity = context.PreEntityImages[PreDeleteImageKey];
-				if (entity.LogicalName != CrmConstants.AnnotationEntityName && entity.LogicalName != CrmConstants.AttachmentEntityName)
-				{
-					//only valid for attachments and annotations
-					return;
-				}
 
-				IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
-				IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
+                IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
+                IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
+
+                if (entity.LogicalName != CrmConstants.AnnotationEntityName && entity.LogicalName != CrmConstants.AttachmentEntityName && entity.LogicalName != CrmConstants.FileEntityName)
+				{
+                    //only valid for files, attachments and annotations
+                    return;
+				}
 
 				Configuration.IConfigurationProvider configurationProvider = Configuration.Factory.GetConfigurationProvider(service, entity.LogicalName, unsecurePluginStepConfiguration, securePluginStepConfiguration);
 				if (configurationProvider.StorageProviderType == Providers.StorageProviderType.CrmDefault)
